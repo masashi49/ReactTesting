@@ -3,19 +3,36 @@ import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import {RenderInput} from "./RenderInput"
 import './App.css';
+import FrameworkList from './FrameworkList';
+import UseEffectRender from "./UseEffectRender"
 
 function App () {
 
   const output = (text) => {
     console.log(text)
   }
-  
+
+  const data = [ {
+    id: 1,
+    item:"React"
+  },{
+    id: 2,
+    item:"Anguler"
+  },{
+    id: 3,
+    item:"Vue"
+  }]
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
         <RenderInput outputConsole={ output } />
+        <FrameworkList frameworks={ data } />
+        <UseEffectRender />
+        {/* <FrameworkList /> */}
+
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
