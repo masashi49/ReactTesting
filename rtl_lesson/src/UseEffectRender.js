@@ -17,7 +17,7 @@ const UseEffectRender = () => {
     
   return (
       <div>
-          { user ? <p>i am { user.name },,{ user.email }</p> : <p>Loading</p>}
+          { user ? <p>I am { user.name },,{ user.email }</p> : null}
     </div>
   )
 }
