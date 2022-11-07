@@ -6,7 +6,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import MockServer from "./MockServer";
 
-//テストの時はコンポーネント側のエンドポイントではなく、テスト用に作成した下記仮想サーバーへアクセスしてくれる。
+//テストの時はコンポーネント側のエンドポイントではなく、テスト用に作成した下記mocサーバーへアクセスしてくれる。
 // req, res, ctxリクエスト,レスポンス,コンテキスト
 const server = setupServer(
     rest.get( "https://jsonplaceholder.typicode.com/users/1", ( req, res, ctx ) => { //reqは今回使わないよ
