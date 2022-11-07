@@ -14,6 +14,8 @@ const server = setupServer(
     } )
 );
 
+
+// beforeEach beforeAll afterEach afterAllの動作順は、こちらを確認する。https://jestjs.io/ja/docs/setup-teardown
 // beforeAll このファイルのテストが始まる前に一度だけ実行する
 beforeAll( () => {
     server.listen() // モックっサーバー起動
