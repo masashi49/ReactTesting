@@ -5,6 +5,7 @@ import {RenderInput} from "./RenderInput"
 import './App.css';
 import FrameworkList from './FrameworkList';
 import UseEffectRender from "./UseEffectRender"
+import MockServer from './MockServer';
 
 function App () {
 
@@ -32,7 +33,7 @@ function App () {
         <FrameworkList frameworks={ data } />
         <UseEffectRender />
         {/* <FrameworkList /> */}
-
+        <MockServer />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
