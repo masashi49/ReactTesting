@@ -66,10 +66,24 @@ export const customCounterSlice = createSlice( {
             state.value += action.payload;
         },
     },
+
+    extraReducers: ( builder ) => {
+        builder.addCase( fetchDummy.fulfilled, ( state, action ) => {
+            state.value = 100 + action.payload
+        } )
+        builder.addCase( fetchDummy.rejected, ( state, action ) => {
+            state.value = 100 - action.payload
+        } )
+        builder.addCase( fetchJSON.fulfilled, ( state, action ) => {
+            state.username = action.payload
+        } )
+    }
+
 } );
 
 export const { increment, decrement, incrementByAmount } = customCounterSlice.actions;
 
 export const selectCount = ( state ) => state.customCounter.value;
+export const selectUsername = ( state ) => state.customCounter.username;
 
 export default customCounterSlice.reducer;
