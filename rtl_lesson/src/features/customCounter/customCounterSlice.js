@@ -24,9 +24,9 @@ export const customCounterSlice = createSlice( {
     name: 'customCounter',
     initialState: {
         value: 0,
-        status: 'idle',
+        status: '',
         mode: 0,
-        userName: ""
+        username: ""
     },
     reducers: {
         increment: ( state ) => {
@@ -43,7 +43,6 @@ export const customCounterSlice = createSlice( {
                 default:
                     break
             }
-            state.value += 1;
         },
         decrement: ( state ) => {
             state.value -= 1;
