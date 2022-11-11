@@ -7,7 +7,7 @@ const sleep = ( msec ) => {
     while ( new Date() - start < msec );
 }
 
-// 非同期関数 2秒待機する
+// 非同期関数の場合、createAsyncThunkを呼び出す。 2秒待機する
 export const fetchDummy = createAsyncThunk( "fetch/dummy", async ( num ) => {
     await sleep( 2000 )
     return num
@@ -62,10 +62,10 @@ export const customCounterSlice = createSlice( {
                     break
 
             }
-            state.value += action.payload;
         },
     },
 
+    // 非同期の計算を行う場合はextraReducersにて書く
     extraReducers: ( builder ) => {
         builder.addCase( fetchDummy.fulfilled, ( state, action ) => {
             state.value = 100 + action.payload

@@ -39,8 +39,23 @@ describe( "Reducer of ReduxtoolKit", () => {
         it( "Should increment by payload value with mode 0", () => {
             const action = { type: incrementByAmount.type, payload: 1 }
             const state = reducer( initialState, action )
-            console.log( state.value )
-            expect( state.value ).toEqual( 4 )
+            expect( state.value ).toEqual( 2 )
+        } )
+        it( "Should increment by 100* payload value with mode 1", () => {
+            initialState = {
+                mode: 1, value: 1
+            }
+            const action = { type: incrementByAmount.type, payload: 3 } // 100倍
+            const state = reducer( initialState, action )
+            expect( state.value ).toEqual( 301 )
+        } )
+        it( "Should increment by 10000* payload value with mode 2", () => {
+            initialState = {
+                mode: 2, value: 1
+            }
+            const action = { type: incrementByAmount.type, payload: 3 } // 100倍
+            const state = reducer( initialState, action )
+            expect( state.value ).toEqual( 30001 )// 3 * 10000 + 1
         } )
     } )
 } )
