@@ -19,7 +19,7 @@ const Redux = () => {
         </button>
         <input
           type="text"
-          placeholder='enter'
+          placeholder='Enter'
           value={ number }
           onChange={ ( e ) => setNumber( e.target.value ) } />
       </div>

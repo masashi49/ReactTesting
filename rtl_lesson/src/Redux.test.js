@@ -27,7 +27,7 @@ describe( "Redux Integration Test", () => {
     } )
 
     // ↑ここまでが準備
-    it( "Should display value with increment by 1 per click", async () => {
+    it( "Should display value withdeCcrement by 1 per click", async () => {
         render(
             <Provider store={ store }>
                 <Redux />
@@ -35,7 +35,65 @@ describe( "Redux Integration Test", () => {
         )
         await userEvent.click( screen.getByText( "+" ) )
         await userEvent.click( screen.getByText( "+" ) )
-        await userEvent.click( screen.getByText( "+" ) )
+        await userEvent.click( screen.getByText( "+" ) ) // 3回クリックした
         expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( 3 ) //このテストidは3というtextをもっているはずだ
     } )
+
+    it( "Should display value with decrement by 1 per click", async () => {
+        render(
+            <Provider store={ store }>
+                <Redux />
+            </Provider>
+        )
+        await userEvent.click( screen.getByText( "-" ) )
+        await userEvent.click( screen.getByText( "-" ) ) // 3回クリックした
+        expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( -2 ) //このテストidは3というtextをもっているはずだ
+    } )
+
+
+    it( "Should display value with increment by 1 amount", async () => {
+        render(
+            <Provider store={ store }>
+                <Redux />
+            </Provider>
+        )
+        await userEvent.type( screen.getByPlaceholderText( "Enter" ), "30" )// プレースホルダーにEnterを持っている要素(ここではinput)に対して、30とタイピングする
+        await userEvent.click( screen.getByText( "incremtneBuAmount" ) )//incremtneBuAmountをクリックする
+        expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( 30 )
+    } )
+
+    it( "Should display value with increment by 1 amount input Text", async () => {
+        render(
+            <Provider store={ store }>
+                <Redux />
+            </Provider>
+        )
+        const inputEnter = screen.getByPlaceholderText( "Enter" )
+        await userEvent.type( inputEnter, "あああああ" )// 日本語を入力
+        await userEvent.click( screen.getByText( "incremtneBuAmount" ) )//incremtneBuAmountをクリックする
+        expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( 0 ) //数字以外は弾いているので、0のままのはず
+
+        await userEvent.type( inputEnter, "100" )// 100を入力
+        await userEvent.click( screen.getByText( "incremtneBuAmount" ) )//incremtneBuAmountをクリックする
+        await userEvent.type( inputEnter, "あああああ" )
+        expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( 0 )
+    } )
+
+    it( "Should display value with increment by 1 amount input Text after number", async () => {
+        render(
+            <Provider store={ store }>
+                <Redux />
+            </Provider>
+        )
+        const inputEnter = screen.getByPlaceholderText( "Enter" )
+        await userEvent.type( inputEnter, "100" )
+        await userEvent.click( screen.getByText( "incremtneBuAmount" ) )
+        expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( 100 )
+        await userEvent.type( inputEnter, "-90" )
+        expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( 10 )
+        await userEvent.type( inputEnter, "あああああ" )
+        expect( screen.getByTestId( "count-value" ) ).toHaveTextContent( 10 )
+    } )
+
+
 } )
