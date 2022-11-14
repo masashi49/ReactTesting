@@ -1,41 +1,43 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
-import {RenderInput} from "./RenderInput"
+import { RenderInput } from "./RenderInput"
 import './App.css';
 import FrameworkList from './FrameworkList';
 import UseEffectRender from "./UseEffectRender"
 import MockServer from './MockServer';
 import Redux from './Redux';
+import ReduxAsync from "./ReduxAsync"
 
 function App () {
 
-  const output = (text) => {
-    console.log(text)
+  const output = ( text ) => {
+    console.log( text )
   }
 
   const data = [ {
     id: 1,
-    item:"React"
-  },{
+    item: "React"
+  }, {
     id: 2,
-    item:"Anguler"
-  },{
+    item: "Anguler"
+  }, {
     id: 3,
-    item:"Vue"
-  }]
+    item: "Vue"
+  } ]
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={ logo } className="App-logo" alt="logo" />
         <Counter />
         <RenderInput outputConsole={ output } />
         <FrameworkList frameworks={ data } />
         <UseEffectRender />
-        {/* <FrameworkList /> */}
+        {/* <FrameworkList /> */ }
         <MockServer />
-        <Redux/>
+        <Redux />
+        <ReduxAsync />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
