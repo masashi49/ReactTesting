@@ -12,7 +12,7 @@ const ReduxAsync = () => {
             <span data-testid="count-value">{ count }</span> {/* data-testidは全部小文字*/ }
             <button onClick={ () => dispatch( fetchDummy( 5 ) ) }>FetchDummy</button>
             { username && <h1>{ username }</h1> }
-            <button onClick={ () => dispatch( fetchJSON() ) }>fetchJSON</button> {/* fetchJSONをdispatch経由で実行*/ }
+            <button onClick={ () => dispatch( fetchJSON() ) }>FetchJSON</button> {/* fetchJSONをdispatch経由で実行*/ }
         </div>
     )
 }
