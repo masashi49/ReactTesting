@@ -1,6 +1,6 @@
 
 // hooksをテストするライブラリをインストール
-// yarn add @testing-library/react-hooks 
+// yarn add @testing-library/react-hooks
 // yarn add react-test-renderer
 
 import { useCounter } from "./useCounter";
@@ -64,3 +64,5 @@ describe( "useCounter custom hooks", () => {
         expect( result.current.count ).toBe( 0 )
     } )
 } )
+
+// 続きははこちらhttps://jestjs.io/ja/docs/getting-started
