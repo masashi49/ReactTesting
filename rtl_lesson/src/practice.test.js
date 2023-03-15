@@ -109,5 +109,6 @@ describe("モックしたメソッドのテスト", () => {
   //上記をmock.callsを使わずに見やすくする
   expect(mockDependency).toBeCalledTimes(2);
   expect(mockDependency).nthCalledWith(2, "some argument");
+  expect(mockDependency).toHaveBeenNthCalledWith(2, "some argument"); // 上と同じ
 });
 // 続きははこちらhttps://jestjs.io/ja/docs/getting-started
