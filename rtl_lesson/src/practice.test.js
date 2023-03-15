@@ -57,12 +57,12 @@ describe("テストを完全に理解する道のり", () => {
     expect(actual).toStrictEqual([0, 3]); // 配列はこれでもtrue
 
     expect(actual.length).toBe(2); // 長さ比較
-    expect(actual).toHaveLength(2); //長さ比較同じ
+    expect(actual).toHaveLength(2); //長さ比較同じ。toHaveLengthはオブジェクトに.lehgthがあり、特定の数値に設定されていることを確認する
 
     const primitiveValueArray = [1, 2, 3];
-    //before
-    expect(primitiveValueArray.includes(1)).toBeTruthy();
-    //after toContainは、アイテムが配列の中に含まれているかを確認できる
+    expect(primitiveValueArray.includes(1)).toBeTruthy(); // toBeTruthy 真かどうか。
+
+    // toContainは、アイテムが配列の中に含まれているかを確認できる
     expect(primitiveValueArray).toContain(1);
     expect(primitiveValueArray).not.toContain(4);
 
@@ -72,8 +72,42 @@ describe("テストを完全に理解する道のり", () => {
     expect(foo).toContain(hoge); // これでも同じ意味
   });
 
-  //　明日はここから
-  //https://zenn.dev/t_poyo/articles/4c47373e364718#%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88(%E9%80%A3%E6%83%B3%E9%85%8D%E5%88%97%EF%BC%89%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88
+  it("objectののテスト", () => {
+    const hoge = { key: "hoge" };
+    expect(hoge.key).toEqual("hoge"); // 値が同じか
+    expect(hoge).toHaveProperty("key", "hoge"); // toHavePropertyはtoEqualが基準となるので、参照一致は見ない。
+  });
+
+  it("特定のkey-valueのペアテスト", () => {
+    const hoge = { id: 1, name: "hoge", address: "foo" };
+    const huga = { address: "foo" };
+
+    Object.entries(huga).forEach(([key, value]) => {
+      expect(hoge[key]).toEqual(value); // 内容に含まれているのでtrue
+    });
+
+    expect(hoge).toMatchObject(huga); // 短くかける
+    expect(hoge).toMatchObject({
+      id: expect.any(Number), // 中にexpect書ける。
+      address: expect.any(String),
+    });
+  });
 });
 
+describe("モックしたメソッドのテスト", () => {
+  const targetMethod = (func) => func("some argument");
+
+  const mockDependency = jest.fn();
+  targetMethod(mockDependency);
+
+  expect(mockDependency.mock.calls.length).toBe(1); //　何回呼ばれたのか
+  expect(mockDependency.mock.calls[0]).toEqual(["some argument"]); //何回目に何が渡されたか
+
+  targetMethod(mockDependency);
+  expect(mockDependency.mock.calls.length).toBe(2);
+
+  //上記をmock.callsを使わずに見やすくする
+  expect(mockDependency).toBeCalledTimes(2);
+  expect(mockDependency).nthCalledWith(2, "some argument");
+});
 // 続きははこちらhttps://jestjs.io/ja/docs/getting-started
